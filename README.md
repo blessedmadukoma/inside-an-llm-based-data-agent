@@ -4,6 +4,23 @@ A small data agent that answers one question about a SQLite database. A language
 
 This is the code behind the post [Inside an LLM-Based Data Agent: From a Question, to a Tool Call, to an Answer](https://mblessed.space/blog/inside-an-llm-based-data-agent). Every prompt, request and reply in the post comes from the traces in `traces/`.
 
+## How It Works
+
+![The architecture: the command line, the backend in harness.py and llm.py, the SQLite database and the LLM provider, with each step numbered](docs/architecture.png)
+
+The numbers match the diagram:
+
+1. 0a and 0b, at start-up: `get_schema()` reads the `CREATE TABLE` text from SQLite. If you pass `--layer`, `read_layer()` reads the definitions file.
+2. 1: `main()` reads the question from the command line.
+3. 2: `build_prompt()` joins the task, the schema, the definitions and the question into one user message.
+4. 3: `chat()` sends the messages and the tool description to Ollama.
+5. 4 to 6: the provider applies the chat template, runs the model and turns its output back into JSON with a tool call.
+6. 7: `run_sql()` runs the query on a read-only connection.
+7. 8: `run_chat()` adds the rows as a `tool` message and calls the model again.
+8. 9: the model writes the answer, and `main()` prints it.
+
+The model never connects to the database. Only the backend does.
+
 ## The Example
 
 The database is one table, `ke_table`, with seven made-up people:
