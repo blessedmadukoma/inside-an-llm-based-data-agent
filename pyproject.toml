@@ -1,0 +1,13 @@
+[project]
+name = "inside-an-llm-based-data-agent"
+version = "0.1.0"
+description = "A small LLM data agent that answers one question over SQLite, with a trace of every request and response."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=3.51.0",
+    "python-dotenv>=1.2.4",
+]
+
+[dependency-groups]
+template = ["openai-harmony>=0.0.4"]

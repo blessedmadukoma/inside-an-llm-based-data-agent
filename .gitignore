@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+
+# Secrets
+.env
+
+# Created by make_db.py
+data/
+
+# Local
+.DS_Store
