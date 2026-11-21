@@ -38,7 +38,6 @@ RUN_SQL = {
     },
 }
 
-# Every request and response that chat() sends and receives, for --trace.
 CALLS = []
 
 
