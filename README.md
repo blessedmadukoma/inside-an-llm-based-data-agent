@@ -89,6 +89,14 @@ The model samples its output, so your run can differ from the traces, even with 
 
 The agent loop stops after 15 tool calls. This limit is a setting in `harness.py` (`MAX_TOOL_CALLS`), not a rule of the API.
 
+## Checks
+
+CI runs the [comment-ratchet](https://github.com/blessedmadukoma/comment-ratchet) pre-commit hook on every push and pull request. The hook fails when a file has more code comments than `.comment-ratchet.json` allows. To run it on your machine:
+
+```bash
+uvx pre-commit run comment-ratchet --all-files
+```
+
 ## License
 
 MIT. See `LICENSE`.
